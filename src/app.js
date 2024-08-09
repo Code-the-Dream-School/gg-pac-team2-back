@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('express-async-errors');
 
 const notFound = require('./middleware/notFound')
 
