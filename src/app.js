@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const notFound = require('./middleware/notFound')
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -20,5 +22,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 // routes
 app.use('/api/v1', mainRouter);
 app.use('/api/v1/auth', authRouter);
+
+app.use(notFound)
 
 module.exports = app;
