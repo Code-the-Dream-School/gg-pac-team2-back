@@ -34,35 +34,44 @@ const register = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error('Error during registration:', error);
-    res.status(500).json({ message: 'Server error' });
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ message: error.message });
+    }
+    next(error);
   }
 };
 
 
 // Login controller
-const login = async (req, res) => {
-  const { email, password } = req.body;
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    throw new BadRequestError('Please provide email and password');
-  }
+    if (!email || !password) {
+      throw new BadRequestError('Please provide email and password');
+    }
 
-  const user = await User.findOne({ email });
+    const user = await User.findOne({ email });
 
-  if (!user) {
-    throw new UnauthenticatedError('Invalid Credentials');
+    if (!user) {
+      throw new UnauthenticatedError('Invalid Credentials');
+    };
+
+    const isPasswordCorrect = await user.comparePassword(password);
+    console.log('Password correct:', isPasswordCorrect);
+
+    if (!isPasswordCorrect) {
+      throw new UnauthenticatedError('Invalid Credentials');
+    };
+
+    const token = user.generateAuthToken();
+    console.log('Generated Token:', token);
+
+    res.status(StatusCodes.OK).json({ user: { name: user.parentName }, token });
+  } catch (error) {
+    console.error('Login Error;', error);
+    next(error);
   };
-
-  const isPasswordCorrect = await user.comparePassword(password);
-
-  if (!isPasswordCorrect) {
-    throw new UnauthenticatedError('Invalid Credentials');
-  };
-
-  const token = user.generateAuthToken();
-
-  res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
 };
 
 module.exports = {
