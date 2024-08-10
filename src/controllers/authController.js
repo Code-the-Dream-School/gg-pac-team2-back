@@ -1,16 +1,7 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/usersModel.js')
-const { StatusCodes } = require('http-status-codes')
-
-// hardcoded User for testing
-const users = [
-  {
-    id: 1,
-    name: "Jack",
-    email: "jack@gmail.com",
-    password: "secret"
-  }
-]
+const User = require('../models/usersModel.js');
+const { StatusCodes } = require('http-status-codes');
+const { BadRequestError, UnauthenticatedError } = require('../errors');
 
 // Register controller
 const register = async (req, res) => {
@@ -35,7 +26,7 @@ const register = async (req, res) => {
     await user.save();
 
     // Respond with user data and token
-    res.status(201).json({
+    res.status(StatusCodes.CREATED).json({
       user: {
         parentName: user.parentName,
         email: user.email,
@@ -53,20 +44,25 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  // Check for user in hardcoded array
-  const user = users.find(user => user.email === email)
+  if (!email || !password) {
+    throw new BadRequestError('Please provide email and password');
+  }
 
-  const token = jwt.sign(
-    { userId: user.id, email: user.email },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: process.env.JWT_LIFETIME,
-    }
-  );
-  // const token = user.createJWT();
+  const user = await User.findOne({ email });
 
+  if (!user) {
+    throw new UnauthenticatedError('Invalid Credentials');
+  };
 
-  res.status(200).json({ user: { name: user.name }, token });
+  const isPasswordCorrect = await user.comparePassword(password);
+
+  if (!isPassCorrect) {
+    throw new UnauthenticatedError('Invalid Credentials');
+  };
+
+  const token = user.generateAuthToken();
+
+  res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
 };
 
 module.exports = {
