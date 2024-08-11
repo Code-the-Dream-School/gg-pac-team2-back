@@ -4,8 +4,8 @@ const { StatusCodes } = require('http-status-codes');
 const { BadRequestError, UnauthenticatedError } = require('../errors');
 
 // Register controller
-const register = async (req, res) => {
-  try {
+const register = async (req, res, next) => {
+
     // Extract data from request body
     const { parentName, email, password } = req.body;
 
@@ -33,13 +33,8 @@ const register = async (req, res) => {
       },
       token,
     });
-  } catch (error) {
-    if (error.name === 'ValidationError') {
-      return res.status(400).json({ message: error.message });
-    }
-    next(error);
-  }
-};
+    next();
+}
 
 
 // Login controller
