@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
     // Required during registration
@@ -87,6 +87,11 @@ userSchema.methods.generateAuthToken = function () {
     );
     this.tokens = this.tokens.concat({ token });
     return token;
+};
+
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  const isMatch = await bcrypt.compare(candidatePassword, this.password);
+  return isMatch
 };
 
 const User = mongoose.model('users', userSchema);
