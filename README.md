@@ -55,16 +55,16 @@ Include the JWT token in the Authorization header as Bearer <token> for any prot
 The User model is designed to store user information securely, including hashed passwords and JWT tokens.
 
 Fields:
-    -   parentName (String): Required field for the parent's name.
-    -   email (String): Required and unique email field with validation.
-    -   password (String): Required field with a minimum length of 6 characters. Stored as a hashed value.
-    -   tokens (Array): Stores JWT tokens associated with the user.
-    -   childrenNames (Array): Optional field to store the names of children.
-    -   numberOfSeatsInCar (Number): Optional field indicating available seats in the car.
-    -   availableDropOffDays (Array): Enum field to store available drop-off days.
-    -   availablePickUpDays (Array): Enum field to store available pick-up days.
-    -   neighborhood (String): Optional field for the neighborhood.
-    -   phoneNumber (String): Optional field with validation for phone numbers.
+    1.  parentName (String): Required field for the parent's name.
+    2.  email (String): Required and unique email field with validation.
+    3.  password (String): Required field with a minimum length of 6 characters. Stored as a hashed value.
+    4.  tokens (Array): Stores JWT tokens associated with the user.
+    5.  childrenNames (Array): Optional field to store the names of children.
+    6.  numberOfSeatsInCar (Number): Optional field indicating available seats in the car.
+    7.  availableDropOffDays (Array): Enum field to store available drop-off days.
+    8.  availablePickUpDays (Array): Enum field to store available pick-up days.
+    9.  neighborhood (String): Optional field for the neighborhood.
+    10. phoneNumber (String): Optional field with validation for phone numbers.
 
 ####### Middleware:
 
