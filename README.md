@@ -38,9 +38,9 @@ This project provides a simple authentication API with two key endpoints:
 Registers a new user and returns a JWT token.
 
 #### Headers: 
-##### Content-Type:
-application/json
-##### Body:
+Content-Type: application/json
+
+#### Body:
 {
    "parentName": "John Doe",
    "email": "johndoe@example.com",
@@ -51,9 +51,8 @@ application/json
 Authenticates a user and returns a JWT token.
 
 #### Headers: 
-##### Content-Type: 
-application/json
-##### Body:
+Content-Type: application/json
+#### Body:
 {
   "email": "johndoe@example.com",
   "password": "yourpassword"
@@ -61,7 +60,7 @@ application/json
 
 Include the JWT token in the Authorization header as Bearer <token> for any protected routes. This API is essential for managing user authentication within the app.
 
-### userSchema
+### User Schema
 
 The User model is designed to store user information securely, including hashed passwords and JWT tokens.
 
@@ -80,6 +79,6 @@ The User model is designed to store user information securely, including hashed 
 
 ### Middleware
 
-    Password Hashing: The password is automatically hashed before saving a user to the database.
+Password Hashing: The password is automatically hashed before saving a user to the database.
 
-    JWT Token Generation: A method to generate and return a JWT token, storing it in the tokens array of the user.
+JWT Token Generation: A method to generate and return a JWT token, storing it in the tokens array of the user.
