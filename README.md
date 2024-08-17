@@ -37,10 +37,10 @@ This project provides a simple authentication API with two key endpoints:
 #### POST /api/v1/auth/register: 
 Registers a new user and returns a JWT token.
 
-#### Headers: 
+##### Headers: 
 Content-Type: application/json
 
-#### Body:
+##### Body:
 {
    "parentName": "John Doe",
    "email": "johndoe@example.com",
@@ -50,9 +50,9 @@ Content-Type: application/json
 #### POST /api/v1/auth/login: 
 Authenticates a user and returns a JWT token.
 
-#### Headers: 
+##### Headers: 
 Content-Type: application/json
-#### Body:
+##### Body:
 {
   "email": "johndoe@example.com",
   "password": "yourpassword"
