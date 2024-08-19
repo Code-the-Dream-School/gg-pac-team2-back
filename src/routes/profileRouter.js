@@ -8,6 +8,6 @@ const {
 
 const authMiddleware = require('../middleware/authMiddleware')
 
-router.route('/profile').get(authMiddleware, readProfile).patch(authMiddleware, updateProfile);
+router.route('/').get(authMiddleware, readProfile).patch(authMiddleware, updateProfile);
 
 module.exports = router;
