@@ -12,6 +12,7 @@ const logger = require('morgan');
 
 const mainRouter = require('./routes/mainRouter.js');
 const authRouter = require('./routes/authRouter.js');
+const profileRouter = require('./routes/profileRouter');
 
 // middleware
 app.use(cors());
@@ -24,6 +25,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 // routes
 app.use('/api/v1', mainRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/profile', profileRouter);
 
 app.use(notFound);
 app.use(errorHandlerMiddleware);
