@@ -5,12 +5,13 @@ const {
   readProfile,
   updateProfile,
   deleteProfile,
-  readAllProfiles
+  readAllProfiles,
+  viewProfileById
 } = require('../controllers/profileController');
 
 const authMiddleware = require('../middleware/authMiddleware')
 
 router.route('/').get(authMiddleware, readAllProfiles).get(authMiddleware, readProfile).patch(authMiddleware, updateProfile);
-router.route('/:id').delete(authMiddleware, deleteProfile)
+router.route('/:id').delete(authMiddleware, deleteProfile).get(authMiddleware, viewProfileById)
 
 module.exports = router;

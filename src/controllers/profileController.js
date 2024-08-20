@@ -20,6 +20,19 @@ const readProfile = async (req, res) => {
   res.status(StatusCodes.OK).json({ user });
 };
 
+const viewProfileById = async (req, res) => {
+  const { id: profileId } = req.params
+
+  const user = await User.findById(profileId).select('-password -tokens')
+
+  if ( !user ) {
+    throw new NotFoundError(`No profile found for user with id ${profileId}`)
+  }
+
+  res.status(StatusCodes.OK).json({ user });
+}
+
+
 const updateProfile = async (req, res) => {
   const {
     body: { parentName, email, password },
@@ -64,5 +77,6 @@ module.exports = {
   readProfile,
   updateProfile,
   deleteProfile,
-  readAllProfiles
+  readAllProfiles,
+  viewProfileById
 };
