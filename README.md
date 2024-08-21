@@ -34,7 +34,7 @@ Note: In the below example, the group's front-end repository was named `bb-pract
 
 This project provides a simple authentication API with two key endpoints:
 
-#### POST /api/v1/auth/register: 
+### POST /api/v1/auth/register: 
 Registers a new user and returns a JWT token.
 
 ##### Headers: 
@@ -47,7 +47,7 @@ Content-Type: application/json
    "password": "yourpassword"
 }
 
-#### POST /api/v1/auth/login: 
+### POST /api/v1/auth/login: 
 Authenticates a user and returns a JWT token.
 
 ##### Headers: 
@@ -59,6 +59,44 @@ Content-Type: application/json
 }
 
 Include the JWT token in the Authorization header as Bearer <token> for any protected routes. This API is essential for managing user authentication within the app.
+
+###  /api/v1/auth/profile:
+#### Endpoint: GET '/allprofiles'
+Retrieves a list of all user profiles (excluding passwords and tokens).
+
+##### Headers:
+Authorization: Bearer <token>
+
+#### Endpoint: GET '/'
+Retrieves the profile of the currently authenticated user.
+
+##### Headers:
+Authorization: Bearer <token>
+
+#### Endpoint: PATCH '/'
+Updates the profile of the currently authenticated user. Requires parentName and email in the request body.
+
+##### Headers:
+Authorization: Bearer <token>
+Content-Type: application/json
+
+##### Body:
+{
+   "email": "johndoe@example.com",
+   "password": "yourpassword"
+}
+
+#### Endpoint: GET '/:id'
+Retrieves the profile of a user by their ID (excluding passwords and tokens).
+
+##### Headers:
+Authorization: Bearer <token>
+
+#### Endpoint: DELETE '/:id'
+Deletes the profile of a user by their ID. Only the profile owner can delete their own profile.
+
+##### Headers:
+Authorization: Bearer <token>
 
 ### User Schema
 
