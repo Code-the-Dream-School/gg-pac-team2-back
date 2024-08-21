@@ -60,7 +60,7 @@ Content-Type: application/json
 
 Include the JWT token in the Authorization header as Bearer <token> for any protected routes. This API is essential for managing user authentication within the app.
 
-###  /api/v1/auth/profile:
+###  /api/v1/profile:
 #### Endpoint: GET '/allprofiles'
 Retrieves a list of all user profiles (excluding passwords and tokens).
 
