@@ -49,13 +49,22 @@ describe('Profile Controller', function () {
   // Read Profile
   describe('GET /api/v1/profile', function () {
     it('should return authenticated user\'s profile', async function () {
-      // Test
+      this.timeout(15000);
+
+      const res = await chai
+        .request(app)
+        .get('/api/v1/profile')
+        .set('Authorization', `Bearer ${token}`);
+
+      res.should.have.status(200);
+      res.body.should.be.an('object');
+      res.body.user.should.have.property('email', 'test.user@test.com');
     });
   });
 
   // Update Profile
   describe('PATCH /api/v1/profile', function () {
-    it('should update authenticated user\'s profile', async function () => {
+    it('should update authenticated user\'s profile', async function () {
       // Test
     });
   });
