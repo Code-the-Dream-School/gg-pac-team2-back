@@ -20,8 +20,26 @@ async function disconnectDB() {
 };
 
 describe('Profile Controller', function () {
+  let token;
+
   before(async () => {
     await connectDB();
+
+    await User.create({
+      parentName: 'Test User',
+      email: 'test.user@test.com',
+      password: 'secret'
+    });
+
+    const res = await chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'test.user@test.com',
+        password: 'secret'
+      });
+
+    token = res.body.token;
   });
 
   after(async () => {
