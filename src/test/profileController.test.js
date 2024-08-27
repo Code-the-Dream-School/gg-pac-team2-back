@@ -21,6 +21,7 @@ async function disconnectDB() {
 
 describe('Profile Controller', function () {
   let token;
+  let testerId;
 
   before(async function () {
     this.timeout(10000);
@@ -42,6 +43,14 @@ describe('Profile Controller', function () {
       });
 
     token = res.body.token;
+
+    const idTester = await User.create({
+      parentName: 'Test User 2',
+      email: 'test2.user@test.com',
+      password: 'secret',
+    });
+
+    testerId = idTester._id.toString();
   });
 
   after(async () => {
@@ -134,7 +143,21 @@ describe('Profile Controller', function () {
   // Read Profile by ID
   describe('GET /api/v1/profile/:id', function () {
     it('should retrieve a user profile by ID', async function () {
-      //Test
+      const res = await chai
+        .request(app)
+        .get(`/api/v1/profile/${testerId}`)
+        .set('Authorization', `Bearer ${token}`);
+
+      res.should.have.status(200);
+      res.body.should.be.an('object');
+      res.body.should.have.property('user');
+      res.body.user.should.have.property('_id').eql(testerId);
+      res.body.user.should.have
+        .property('parentName')
+        .eql('Test User 2');
+      res.body.user.should.have
+        .property('email')
+        .eql('test2.user@test.com');
     });
   });
 
