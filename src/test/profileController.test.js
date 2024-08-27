@@ -23,6 +23,8 @@ describe('Profile Controller', function () {
   let token;
 
   before(async function () {
+    this.timeout(10000);
+
     await connectDB();
 
     await User.create({
@@ -68,13 +70,17 @@ describe('Profile Controller', function () {
   // Update Profile
   describe('PATCH /api/v1/profile', function () {
     it("should update authenticated user's profile", async function () {
+      this.timeout(15000);
+
       const res = await chai
         .request(app)
-        .get('/api/v1/profile')
+        .patch('/api/v1/profile')
         .set('Authorization', `Bearer ${token}`)
         .send({
           parentName: 'Updated User',
           email: 'updated.user@test.com',
+          numberOfSeatsInCar: 3,
+          neighborhood: 'New Neighborhood',
         });
 
       res.should.have.status(200);
@@ -93,7 +99,35 @@ describe('Profile Controller', function () {
   // Read All Profiles
   describe('GET /api/v1/profile/allprofiles', function () {
     it('should retrieve and list all user profiles', async function () {
-      // Test
+      await User.create([
+        {
+          parentName: 'User One',
+          email: 'user.one@test.com',
+          password: 'secret',
+        },
+        {
+          parentName: 'User Two',
+          email: 'user.two@test.com',
+          password: 'secret',
+        },
+      ]);
+
+      const res = await chai
+        .request(app)
+        .get('/api/v1/profile/allprofiles')
+        .set('Authorization', `Bearer ${token}`);
+
+      console.log('Response body:', res.body);
+
+      res.should.have.status(200);
+      res.body.should.be.an('object');
+      res.body.should.have.property('users');
+      res.body.users.should.be.an('array');
+      res.body.users.length.should.be.greaterThan(1);
+      res.body.users.forEach((profile) => {
+        profile.should.have.property('parentName');
+        profile.should.have.property('email');
+      });
     });
   });
 

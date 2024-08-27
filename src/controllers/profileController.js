@@ -35,7 +35,7 @@ const viewProfileById = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   const {
-    body: { parentName, email, password },
+    body: { parentName, email, numberOfSeatsInCar, neighborhood },
     user: { userId }
   } = req;
 
@@ -72,7 +72,7 @@ const deleteProfile = async (req, res) => {
 
   res.status(StatusCodes.OK).json({ msg: "Profile deleted successfully "});
 }
- 
+
 module.exports = {
   readProfile,
   updateProfile,
