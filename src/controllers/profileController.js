@@ -1,12 +1,16 @@
 const User = require('../models/usersModel');
 const { StatusCodes } = require('http-status-codes');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../errors');
+const {
+  BadRequestError,
+  NotFoundError,
+  ForbiddenError,
+} = require('../errors');
 
 const readAllProfiles = async (req, res) => {
-  const users = await User.find({}).select('-password -tokens')
+  const users = await User.find({}).select('-password -tokens');
 
   res.status(StatusCodes.OK).json({ users });
-}
+};
 
 const readProfile = async (req, res) => {
   const { userId } = req.user;
@@ -14,29 +18,34 @@ const readProfile = async (req, res) => {
   const user = await User.findById(userId);
 
   if (!user) {
-    throw new NotFoundError(`No profile found for user with id ${userId}`);
+    throw new NotFoundError(
+      `No profile found for user with id ${userId}`
+    );
   }
 
   res.status(StatusCodes.OK).json({ user });
 };
 
 const viewProfileById = async (req, res) => {
-  const { id: profileId } = req.params
+  const { id: profileId } = req.params;
 
-  const user = await User.findById(profileId).select('-password -tokens')
+  const user = await User.findById(profileId).select(
+    '-password -tokens'
+  );
 
-  if ( !user ) {
-    throw new NotFoundError(`No profile found for user with id ${profileId}`)
+  if (!user) {
+    throw new NotFoundError(
+      `No profile found for user with id ${profileId}`
+    );
   }
 
   res.status(StatusCodes.OK).json({ user });
-}
-
+};
 
 const updateProfile = async (req, res) => {
   const {
     body: { parentName, email, numberOfSeatsInCar, neighborhood },
-    user: { userId }
+    user: { userId },
   } = req;
 
   if (!parentName || !email) {
@@ -50,7 +59,9 @@ const updateProfile = async (req, res) => {
   );
 
   if (!user) {
-    throw new NotFoundError(`No profile found for user with id ${userId}`);
+    throw new NotFoundError(
+      `No profile found for user with id ${userId}`
+    );
   }
 
   res.status(StatusCodes.OK).json({ user });
@@ -60,23 +71,29 @@ const deleteProfile = async (req, res) => {
   const { userId } = req.user;
   const { id: profileId } = req.params;
 
-  if ( userId != profileId ) {
-    throw new ForbiddenError('You are not authorized to delete this profile')
+  if (userId != profileId) {
+    throw new ForbiddenError(
+      'You are not authorized to delete this profile'
+    );
   }
 
-  const user = await User.findByIdAndDelete(profileId)
+  const user = await User.findByIdAndDelete(profileId);
 
-  if ( !user ) {
-    throw new NotFoundError(`No profile found for user with id ${profileId}`)
+  if (!user) {
+    throw new NotFoundError(
+      `No profile found for user with id ${profileId}`
+    );
   }
 
-  res.status(StatusCodes.OK).json({ msg: "Profile deleted successfully "});
-}
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: 'Profile deleted successfully' });
+};
 
 module.exports = {
   readProfile,
   updateProfile,
   deleteProfile,
   readAllProfiles,
-  viewProfileById
+  viewProfileById,
 };

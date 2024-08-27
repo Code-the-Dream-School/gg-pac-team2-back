@@ -21,18 +21,21 @@ async function disconnectDB() {
 
 describe('Profile Controller', function () {
   let token;
+  let userId;
   let testerId;
 
   before(async function () {
-    this.timeout(10000);
+    this.timeout(15000);
 
     await connectDB();
 
-    await User.create({
+    const user = await User.create({
       parentName: 'Test User',
       email: 'test.user@test.com',
       password: 'secret',
     });
+
+    userId = user._id.toString();
 
     const res = await chai
       .request(app)
@@ -163,8 +166,17 @@ describe('Profile Controller', function () {
 
   // Delete Profile
   describe('DELETE /api/v1/profile/:id', function () {
-    it('should delete user profile', async function () {
-      // Test
+    it('should delete a user profile', async function () {
+      const res = await chai
+        .request(app)
+        .delete(`/api/v1/profile/${userId}`)
+        .set('Authorization', `Bearer ${token}`);
+
+      res.should.have.status(200); // Expect success if the user has permission
+      res.body.should.be.an('object');
+      res.body.should.have
+        .property('msg')
+        .eql('Profile deleted successfully');
     });
   });
 });
