@@ -8,8 +8,28 @@ const {
 
 const readAllProfiles = async (req, res) => {
   const { numberOfSeatsInCar, availableDropOffDays, availablePickUpDays, neighborhood, sort, fields, page, limit } = req.query;
+  const queryObject = {};
 
-  const users = await User.find({}).select('-password -tokens');
+  if (numberOfSeatsInCar) {
+    queryObject.numberOfSeatsInCar = { $gte: Number(numberOfSeatsInCar) };
+  }
+
+  if (availableDropOffDays) {
+    queryObject.availableDropOffDays = { $in: availableDropOffDays.split(',') }
+  }
+
+  if (availablePickUpDays) {
+    queryObject.availablePickUpDays = { $in: availablePickUpDays.split(',') };
+  }
+
+  if (neighborhood) {
+    queryObject.neighborhood = neighborhood;
+  }
+
+  let result = User.find(queryObject).select('-password -tokens');
+  // const users = await User.find({}).select('-password -tokens');
+
+  const users = await result;
 
   res.status(StatusCodes.OK).json({ users });
 };
