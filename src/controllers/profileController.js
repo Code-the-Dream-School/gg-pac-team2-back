@@ -7,6 +7,8 @@ const {
 } = require('../errors');
 
 const readAllProfiles = async (req, res) => {
+  const { numberOfSeatsInCar, availableDropOffDays, availablePickUpDays, neighborhood, sort, fields, page, limit } = req.query;
+
   const users = await User.find({}).select('-password -tokens');
 
   res.status(StatusCodes.OK).json({ users });
