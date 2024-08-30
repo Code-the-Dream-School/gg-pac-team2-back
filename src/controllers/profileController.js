@@ -36,6 +36,9 @@ const readAllProfiles = async (req, res) => {
     result = result.sort('createdAt');
   }
 
+  const skip = (page - 1) * limit;
+  result = result.skip(skip).limit(Number(limit));
+
   const users = await result;
 
   res.status(StatusCodes.OK).json({ users });
@@ -52,7 +55,7 @@ const readProfile = async (req, res) => {
     );
   }
 
-  res.status(StatusCodes.OK).json({ user });
+  res.status(StatusCodes.OK).json({ users, nbHits: users.length });
 };
 
 const viewProfileById = async (req, res) => {
