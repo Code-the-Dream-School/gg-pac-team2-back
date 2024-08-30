@@ -29,6 +29,13 @@ const readAllProfiles = async (req, res) => {
   let result = User.find(queryObject).select('-password -tokens');
   // const users = await User.find({}).select('-password -tokens');
 
+  if (sort) {
+    const sortList = sort.split(',').join(' ');
+    result = result.sort(sortList);
+  } else {
+    result = result.sort('createdAt');
+  }
+
   const users = await result;
 
   res.status(StatusCodes.OK).json({ users });
