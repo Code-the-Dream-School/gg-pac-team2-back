@@ -25,7 +25,7 @@ describe('Profile Controller', function () {
   let testerId;
 
   before(async function () {
-    this.timeout(15000);
+    this.timeout(25000);
 
     await connectDB();
 

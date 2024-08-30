@@ -55,7 +55,7 @@ const readProfile = async (req, res) => {
     );
   }
 
-  res.status(StatusCodes.OK).json({ users, nbHits: users.length });
+  res.status(StatusCodes.OK).json({ user });
 };
 
 const viewProfileById = async (req, res) => {
