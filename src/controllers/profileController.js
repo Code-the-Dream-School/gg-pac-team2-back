@@ -7,7 +7,39 @@ const {
 } = require('../errors');
 
 const readAllProfiles = async (req, res) => {
-  const users = await User.find({}).select('-password -tokens');
+  const { numberOfSeatsInCar, availableDropOffDays, availablePickUpDays, neighborhood, sort, fields, page, limit } = req.query;
+  const queryObject = {};
+
+  if (numberOfSeatsInCar) {
+    queryObject.numberOfSeatsInCar = { $gte: Number(numberOfSeatsInCar) };
+  }
+
+  if (availableDropOffDays) {
+    queryObject.availableDropOffDays = { $in: availableDropOffDays.split(',') }
+  }
+
+  if (availablePickUpDays) {
+    queryObject.availablePickUpDays = { $in: availablePickUpDays.split(',') };
+  }
+
+  if (neighborhood) {
+    queryObject.neighborhood = neighborhood;
+  }
+
+  let result = User.find(queryObject).select('-password -tokens');
+  // const users = await User.find({}).select('-password -tokens');
+
+  if (sort) {
+    const sortList = sort.split(',').join(' ');
+    result = result.sort(sortList);
+  } else {
+    result = result.sort('createdAt');
+  }
+
+  const skip = (page - 1) * limit;
+  result = result.skip(skip).limit(Number(limit));
+
+  const users = await result;
 
   res.status(StatusCodes.OK).json({ users });
 };
