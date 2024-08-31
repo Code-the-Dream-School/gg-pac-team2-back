@@ -14,6 +14,7 @@ const mainRouter = require('./routes/mainRouter.js');
 const authRouter = require('./routes/authRouter.js');
 const profileRouter = require('./routes/profileRouter');
 
+ 
 // middleware
 app.use(cors());
 app.use(express.json());

@@ -84,14 +84,16 @@ userSchema.methods.generateAuthToken = function () {
       {
         userId: this._id,
         email: this.email,
-        parentName: this.parentName
+        parentName: this.parentName,
       },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_LIFETIME }
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_LIFETIME }
     );
     this.tokens = this.tokens.concat({ token });
     return token;
-};
+  };
+  
+
 
 userSchema.methods.comparePassword = async function (candidatePassword) {
   const isMatch = await bcrypt.compare(candidatePassword, this.password);

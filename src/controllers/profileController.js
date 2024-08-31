@@ -6,6 +6,7 @@ const {
   ForbiddenError,
 } = require('../errors');
 
+// API to view All Profiles
 const readAllProfiles = async (req, res) => {
   const { numberOfSeatsInCar, availableDropOffDays, availablePickUpDays, neighborhood, sort, fields, page, limit } = req.query;
   const queryObject = {};
@@ -44,6 +45,7 @@ const readAllProfiles = async (req, res) => {
   res.status(StatusCodes.OK).json({ users });
 };
 
+// API to view own Profile
 const readProfile = async (req, res) => {
   const { userId } = req.user;
 
@@ -58,6 +60,7 @@ const readProfile = async (req, res) => {
   res.status(StatusCodes.OK).json({ user });
 };
 
+// API to view another user profile
 const viewProfileById = async (req, res) => {
   const { id: profileId } = req.params;
 
@@ -74,6 +77,7 @@ const viewProfileById = async (req, res) => {
   res.status(StatusCodes.OK).json({ user });
 };
 
+// API to update own user profile
 const updateProfile = async (req, res) => {
   const {
     body: { parentName, email, numberOfSeatsInCar, neighborhood },
@@ -99,6 +103,7 @@ const updateProfile = async (req, res) => {
   res.status(StatusCodes.OK).json({ user });
 };
 
+// API to delete own user profile
 const deleteProfile = async (req, res) => {
   const { userId } = req.user;
   const { id: profileId } = req.params;
@@ -122,10 +127,42 @@ const deleteProfile = async (req, res) => {
     .json({ msg: 'Profile deleted successfully' });
 };
 
+// API to change password from profile
+const changePassword = async (req, res) => {
+  const { userId } = req.user;
+  const { currentPassword, newPassword } = req.body;
+  const { id: profileId } = req.params;
+
+  if (userId != profileId) {
+    throw new ForbiddenError(
+      'You are not authorized to change the password of this profile'
+    );
+  }
+
+  const user = await User.findById(profileId);
+
+  if (!user) {
+    throw new NotFoundError('User not found');
+  }
+
+  const isPasswordCorrect = await user.comparePassword(currentPassword);
+
+  if (!isPasswordCorrect) {
+    throw new UnauthenticatedError('Invalid current Password');
+  }
+
+  user.password = newPassword;
+  user.tokens = [];
+  await user.save();
+
+  res.status(StatusCodes.OK).json({ msg: 'Password changed Successfully' });
+};
+
 module.exports = {
   readProfile,
   updateProfile,
   deleteProfile,
   readAllProfiles,
   viewProfileById,
+  changePassword,
 };
