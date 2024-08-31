@@ -14,7 +14,7 @@ const mg = mailgun.client({
 });
 
 // Register controller
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   try {
     // Extract data from request body
     const { parentName, email, password } = req.body;
