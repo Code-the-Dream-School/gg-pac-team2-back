@@ -1,13 +1,17 @@
 const User = require('../models/usersModel');
 const { StatusCodes } = require('http-status-codes');
-const { BadRequestError, NotFoundError, ForbiddenError } = require('../errors');
+const {
+  BadRequestError,
+  NotFoundError,
+  ForbiddenError,
+} = require('../errors');
 
 // API to view All Profiles
 const readAllProfiles = async (req, res) => {
-  const users = await User.find({}).select('-password -tokens')
+  const users = await User.find({}).select('-password -tokens');
 
   res.status(StatusCodes.OK).json({ users });
-}
+};
 
 // API to view own Profile
 const readProfile = async (req, res) => {
@@ -16,7 +20,9 @@ const readProfile = async (req, res) => {
   const user = await User.findById(userId);
 
   if (!user) {
-    throw new NotFoundError(`No profile found for user with id ${userId}`);
+    throw new NotFoundError(
+      `No profile found for user with id ${userId}`
+    );
   }
 
   res.status(StatusCodes.OK).json({ user });
@@ -24,22 +30,26 @@ const readProfile = async (req, res) => {
 
 // API to view another user profile
 const viewProfileById = async (req, res) => {
-  const { id: profileId } = req.params
+  const { id: profileId } = req.params;
 
-  const user = await User.findById(profileId).select('-password -tokens')
+  const user = await User.findById(profileId).select(
+    '-password -tokens'
+  );
 
-  if ( !user ) {
-    throw new NotFoundError(`No profile found for user with id ${profileId}`)
+  if (!user) {
+    throw new NotFoundError(
+      `No profile found for user with id ${profileId}`
+    );
   }
 
   res.status(StatusCodes.OK).json({ user });
-}
+};
 
 // API to update own user profile
 const updateProfile = async (req, res) => {
   const {
-    body: { parentName, email, password },
-    user: { userId }
+    body: { parentName, email, numberOfSeatsInCar, neighborhood },
+    user: { userId },
   } = req;
 
   if (!parentName || !email) {
@@ -53,7 +63,9 @@ const updateProfile = async (req, res) => {
   );
 
   if (!user) {
-    throw new NotFoundError(`No profile found for user with id ${userId}`);
+    throw new NotFoundError(
+      `No profile found for user with id ${userId}`
+    );
   }
 
   res.status(StatusCodes.OK).json({ user });
@@ -64,54 +76,61 @@ const deleteProfile = async (req, res) => {
   const { userId } = req.user;
   const { id: profileId } = req.params;
 
-  if ( userId != profileId ) {
-    throw new ForbiddenError('You are not authorized to delete this profile')
+  if (userId != profileId) {
+    throw new ForbiddenError(
+      'You are not authorized to delete this profile'
+    );
   }
 
-  const user = await User.findByIdAndDelete(profileId)
+  const user = await User.findByIdAndDelete(profileId);
 
-  if ( !user ) {
-    throw new NotFoundError(`No profile found for user with id ${profileId}`)
+  if (!user) {
+    throw new NotFoundError(
+      `No profile found for user with id ${profileId}`
+    );
   }
 
-  res.status(StatusCodes.OK).json({ msg: "Profile deleted successfully "});
-}
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: 'Profile deleted successfully' });
+};
 
 // API to change password from profile
 const changePassword = async (req, res) => {
-  const { userId } = req.user
-  const { currentPassword, newPassword } = req.body
+  const { userId } = req.user;
+  const { currentPassword, newPassword } = req.body;
   const { id: profileId } = req.params;
-  
-  if ( userId != profileId ) {
-    throw new ForbiddenError('You are not authorized to change password of this profile')
+
+  if (userId != profileId) {
+    throw new ForbiddenError(
+      'You are not authorized to change the password of this profile'
+    );
   }
 
-  const user = await User.findById(profileId)
+  const user = await User.findById(profileId);
 
   if (!user) {
-    throw new NotFoundError('User not found')
+    throw new NotFoundError('User not found');
   }
 
-  const isPasswordCorrect = await user.comparePassword(currentPassword)
+  const isPasswordCorrect = await user.comparePassword(currentPassword);
 
-  if ( !isPasswordCorrect) {
-    throw new UnauthenticatedError('Invalid current Password')
-  }  
-  
+  if (!isPasswordCorrect) {
+    throw new UnauthenticatedError('Invalid current Password');
+  }
+
   user.password = newPassword;
   user.tokens = [];
   await user.save();
 
-  res.status(StatusCodes.OK).json({ msg: "Password changed Successfully"})
+  res.status(StatusCodes.OK).json({ msg: 'Password changed Successfully' });
+};
 
-}
- 
 module.exports = {
   readProfile,
   updateProfile,
   deleteProfile,
   readAllProfiles,
   viewProfileById,
-  changePassword
+  changePassword,
 };

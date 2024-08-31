@@ -79,20 +79,20 @@ userSchema.pre('save', async function (next) {
     next();
 });
 
-userSchema.methods.generateAuthToken = async function () {
+userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign(
       {
         userId: this._id,
         email: this.email,
-        parentName: this.parentName
+        parentName: this.parentName,
       },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_LIFETIME }
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_LIFETIME }
     );
     this.tokens = this.tokens.concat({ token });
-    await this.save();  // Save the updated user document
     return token;
-};
+  };
+  
 
 
 userSchema.methods.comparePassword = async function (candidatePassword) {
