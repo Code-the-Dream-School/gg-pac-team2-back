@@ -11,7 +11,7 @@ const authenticationMiddleware = async (req, res, next) => {
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = { userId: payload.userId, parentName: payload.parentName };
+    req.user = { userId: payload.userId, parentName: payload.parentName, token: token };
     console.log('Authenticated user:', req.user);
   } catch {
     throw new UnauthenticatedError('Authentication invalid');
