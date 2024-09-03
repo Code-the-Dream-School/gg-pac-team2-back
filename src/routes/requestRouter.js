@@ -15,8 +15,8 @@ router.route('/').post(authMiddleware, createRequest);
 router
   .route('/:id')
   .get(authMiddleware, readRequest)
-  .patch(authMiddleware, updateRequest);
-// .delete(authMiddleware, deleteRequest);
+  .patch(authMiddleware, updateRequest)
+  .delete(authMiddleware, deleteRequest);
 router.route('/:id/status').patch(authMiddleware, updateStatus);
 
 module.exports = router;

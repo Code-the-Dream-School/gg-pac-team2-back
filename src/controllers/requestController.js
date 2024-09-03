@@ -112,9 +112,26 @@ updateStatus = async (req, res) => {
   res.status(StatusCodes.OK).json({ request });
 };
 
+const deleteRequest = async (req, res) => {
+  const { id: requestId } = req.params;
+
+  const request = await RideRequest.findById(requestId);
+
+  if (!request) {
+    throw new NotFoundError(`No request found with id ${requestId}`);
+  }
+
+  await RideRequest.findByIdAndDelete(requestId);
+
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: 'Request deleted successfully' });
+};
+
 module.exports = {
   createRequest,
   readRequest,
   updateRequest,
   updateStatus,
+  deleteRequest,
 };
