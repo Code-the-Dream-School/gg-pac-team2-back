@@ -6,6 +6,11 @@ const rideRequestSchema = new mongoose.Schema({
     ref: 'users',
     required: true
   },
+  profile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
+    required: true
+  },
   requestedDropOffDays: {
     type: String,
     enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
