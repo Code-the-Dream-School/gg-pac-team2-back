@@ -85,7 +85,7 @@ const updateRequest = async (req, res) => {
   res.status(StatusCodes.OK).json({ request });
 };
 
-updateStatus = async (req, res) => {
+const updateStatus = async (req, res) => {
   const { id: requestId } = req.params;
   const { status } = req.body;
 
