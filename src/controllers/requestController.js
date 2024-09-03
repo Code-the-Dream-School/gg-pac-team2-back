@@ -85,8 +85,36 @@ const updateRequest = async (req, res) => {
   res.status(StatusCodes.OK).json({ request });
 };
 
+updateStatus = async (req, res) => {
+  const { id: requestId } = req.params;
+  const { status } = req.body;
+
+  if (!['pending', 'approved', 'declined'].includes(status)) {
+    throw new BadRequestError('Invalid status');
+  }
+
+  const request = await RideRequest.findById(requestId);
+
+  if (!request) {
+    throw new NotFoundError(`No request found with id ${requestId}`);
+  }
+
+  const userId = req.user.userId;
+  if (!request.profile.equals(userId)) {
+    throw new ForbiddenError(
+      'You do not have permission to update the status of this request'
+    );
+  }
+
+  request.status = status;
+  await request.save();
+
+  res.status(StatusCodes.OK).json({ request });
+};
+
 module.exports = {
   createRequest,
   readRequest,
   updateRequest,
+  updateStatus,
 };
