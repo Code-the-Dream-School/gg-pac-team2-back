@@ -52,7 +52,41 @@ const readRequest = async (req, res) => {
   res.status(StatusCodes.OK).json({ request });
 };
 
+// Update a request
+const updateRequest = async (req, res) => {
+  const { id: requestId } = req.params;
+  const { requestedDropOffDays, requestedPickUpDays } = req.body;
+
+  const userId = req.user.userId;
+
+  const request = await RideRequest.findById(requestId);
+
+  if (!request) {
+    throw new NotFoundError(`No request found with id ${requestId}`);
+  }
+
+  const isRequester = request.requester.equals(userId);
+
+  if (!isRequester) {
+    throw new ForbiddenError(
+      'You do not have permission to update this request'
+    );
+  }
+
+  if (requestedDropOffDays) {
+    request.requestedDropOffDays = requestedDropOffDays;
+  }
+  if (requestedPickUpDays) {
+    request.requestedPickUpDays = requestedPickUpDays;
+  }
+
+  await request.save();
+
+  res.status(StatusCodes.OK).json({ request });
+};
+
 module.exports = {
   createRequest,
   readRequest,
+  updateRequest,
 };
