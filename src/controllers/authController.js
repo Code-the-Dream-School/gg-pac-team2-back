@@ -29,7 +29,7 @@ const register = async (req, res, next) => {
     const user = new User({ parentName, email, password });
 
     // Generate JWT token and save it in the user document
-    const token = user.generateAuthToken();
+    const token = await user.generateAuthToken();
 
     // Save the user to the database
     await user.save();
@@ -72,6 +72,8 @@ const login = async (req, res, next) => {
     };
 
     const token = await user.generateAuthToken();
+
+    await user.save()
 
     res.status(StatusCodes.OK).json({ user: { name: user.parentName }, token });
   } catch (error) {
@@ -146,10 +148,28 @@ const resetPassword = async (req, res) => {
   res.status(StatusCodes.OK).json({ message: "Password has been reset successfully" });
 };
 
+// Logout API
+const logout = async (req, res) => {
+  const { token } = req.user
+
+  const user = await User.findOne({ 'tokens.token' : token})
+
+  if (!user) {
+    throw new UnauthenticatedError('Invalid Token')
+  }
+
+  user.tokens = user.tokens.filter((userToken) => userToken.token !== token)
+
+  await user.save();
+
+  res.status(StatusCodes.OK).json({ message: 'Logged out successfully'})
+}
+
 
 module.exports = {
   register,
   login,
   forgotPassword,
-  resetPassword
+  resetPassword,
+  logout
 };
