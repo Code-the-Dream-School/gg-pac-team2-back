@@ -8,24 +8,25 @@ const {
 
 // Create a new request
 const createRequest = async (req, res) => {
-  const {
-    requestedDropOffDays,
-    requestedPickUpDays,
-    selectedChildren,
-    phoneNumber,
-  } = req.body;
+  const { profile, requestedDropOffDays, requestedPickUpDays } =
+    req.body;
+
+  console.log('Authenticated user:', req.user);
+
+  if (!req.user || !req.user.userId) {
+    throw new BadRequestError('User not authenticated');
+  }
 
   const rideRequest = await RideRequest.create({
-    requester: req.user._id,
+    requester: req.user.userId,
+    profile,
     requestedDropOffDays,
     requestedPickUpDays,
-    selectedChildren,
-    phoneNumber,
   });
 
   res.status(StatusCodes.CREATED).json({ rideRequest });
 };
 
 module.exports = {
-  createRequest
+  createRequest,
 };

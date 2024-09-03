@@ -28,7 +28,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use('/api/v1', mainRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/profile', profileRouter);
-app.use('/api/v1/requests', requestRouter)
+app.use('/api/v1/requests', requestRouter);
 
 app.use(notFound);
 app.use(errorHandlerMiddleware);
