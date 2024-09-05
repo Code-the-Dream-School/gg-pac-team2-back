@@ -4,6 +4,8 @@ const router = express.Router();
 const {
   createRequest,
   readRequest,
+  readSentRequests,
+  readReceivedRequests,
   updateRequest,
   updateStatus,
   deleteRequest,
@@ -12,6 +14,8 @@ const {
 const authMiddleware = require('../middleware/authMiddleware');
 
 router.route('/').post(authMiddleware, createRequest);
+router.route('/sent').get(authMiddleware, readSentRequests);
+router.route('/received').get(authMiddleware, readReceivedRequests);
 router
   .route('/:id')
   .get(authMiddleware, readRequest)

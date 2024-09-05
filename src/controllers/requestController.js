@@ -52,6 +52,24 @@ const readRequest = async (req, res) => {
   res.status(StatusCodes.OK).json({ request });
 };
 
+// Read all sent requests
+const readSentRequests = async (req, res) => {
+  const userId = req.user.userId;
+
+  const requests = await RideRequest.find({ requester: userId });
+
+  res.status(StatusCodes.OK).json({ requests });
+};
+
+// Read all received requests
+const readReceivedRequests = async (req, res) => {
+  const userId = req.user.userId;
+
+  const requests = await RideRequest.find({ profile: userId });
+
+  res.status(StatusCodes.OK).json({ requests });
+};
+
 // Update a request
 const updateRequest = async (req, res) => {
   const { id: requestId } = req.params;
@@ -131,6 +149,8 @@ const deleteRequest = async (req, res) => {
 module.exports = {
   createRequest,
   readRequest,
+  readSentRequests,
+  readReceivedRequests,
   updateRequest,
   updateStatus,
   deleteRequest,
