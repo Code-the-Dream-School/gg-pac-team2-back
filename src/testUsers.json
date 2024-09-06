@@ -201,7 +201,7 @@
     "parentName": "Hilda/Zelda Spellman",
     "email": "hilda.spellman@test.com",
     "password": "secret",
-    "numberOfSeatsInCar": 17,
+    "numberOfSeatsInCar": 13,
     "availableDropOffDays": ["Monday", "Wednesday", "Friday"],
     "availablePickUpDays": ["Monday", "Thursday"],
     "neighborhood": "Westbridge"
