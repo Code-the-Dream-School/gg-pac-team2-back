@@ -12,12 +12,12 @@ const rideRequestSchema = new mongoose.Schema({
     required: true
   },
   requestedDropOffDays: {
-    type: String,
+    type: [String],
     enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     required: false
   },
   requestedPickUpDays: {
-    type: String,
+    type: [String],
     enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     required: false
   },
