@@ -99,7 +99,7 @@ const forgotPassword = async (req, res) => {
   );
 
   // Send reset link via email
-  const resetUrl = `http://localhost:5173/api/v1/auth/reset-password/${user._id}/${resetToken}`;
+  const resetUrl = `http://localhost:5173/reset-password/${user._id}/${resetToken}`;
 
   const data = {
     from: process.env.EMAIL_USER,
