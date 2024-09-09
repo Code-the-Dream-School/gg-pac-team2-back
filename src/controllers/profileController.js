@@ -79,29 +79,34 @@ const viewProfileById = async (req, res) => {
 
 // API to update own user profile
 const updateProfile = async (req, res) => {
-  const {
-    body: { parentName, email, numberOfSeatsInCar, neighborhood },
-    user: { userId },
-  } = req;
+  const { user: { userId } } = req;
 
-  if (!parentName || !email) {
-    throw new BadRequestError('Parent name and email are required');
-  }
-
-  const user = await User.findOneAndUpdate(
-    { _id: userId },
-    req.body,
-    { new: true, runValidators: true }
+  // Filter out undefined or empty fields in req.body to avoid overwriting existing data
+  const updatedData = Object.fromEntries(
+    Object.entries(req.body).filter(([_, value]) => value !== undefined && value !== '')
   );
 
-  if (!user) {
-    throw new NotFoundError(
-      `No profile found for user with id ${userId}`
-    );
+  if (Object.keys(updatedData).length === 0) {
+    return res.status(StatusCodes.BAD_REQUEST).json({ msg: "No valid data to update" });
   }
 
-  res.status(StatusCodes.OK).json({ user });
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
+      { $set: updatedData },
+      { new: true, runValidators: true }
+    );
+
+    if (!user) {
+      throw new NotFoundError(`No profile found for user with id ${userId}`);
+    }
+
+    res.status(StatusCodes.OK).json({ user });
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: error.message });
+  }
 };
+
 
 // API to delete own user profile
 const deleteProfile = async (req, res) => {
