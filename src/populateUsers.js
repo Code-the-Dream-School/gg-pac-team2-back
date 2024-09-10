@@ -10,7 +10,7 @@ const start = async () => {
     await connectDB(process.env.MONGO_URI);
     await users.deleteMany();
     await users.create(testUsers);
-    console.log('Success seeding database!!!!');
+    console.log('Success seeding users database!!!!');
     process.exit(0);
   } catch (error) {
     console.error(error);

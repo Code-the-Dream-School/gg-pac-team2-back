@@ -10,7 +10,7 @@ const start = async () => {
     await connectDB(process.env.MONGO_URI);
     await RideRequest.deleteMany();
     await RideRequest.create(rideRequests);
-    console.log('Success seeding ride requests!!!!');
+    console.log('Success seeding ride requests database!!!!');
     process.exit(0);
   } catch (error) {
     console.log(error);
