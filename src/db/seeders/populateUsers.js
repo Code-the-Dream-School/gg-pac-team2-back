@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-const connectDB = require('./db/conn');
-const users = require('./models/usersModel');
+const connectDB = require('../conn');
+const users = require('../../models/usersModel');
 
 const testUsers = require('./testUsers.json');
 

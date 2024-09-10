@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-const connectDB = require('./db/conn');
-const RideRequest = require('./models/requestModel');
+const connectDB = require('../conn');
+const RideRequest = require('../../models/requestModel');
 
 const rideRequests = require('./testRequests.json');
 
