@@ -1,16 +1,20 @@
 const jwt = require('jsonwebtoken');
-const formdata = require('form-data')
-const Mailgun = require('mailgun.js')
-const mailgun = new Mailgun(formdata)
+const formdata = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formdata);
 const User = require('../models/usersModel.js');
 const { StatusCodes } = require('http-status-codes');
-const { BadRequestError, UnauthenticatedError, NotFoundError } = require('../errors');
+const {
+  BadRequestError,
+  UnauthenticatedError,
+  NotFoundError,
+} = require('../errors');
 
 // Create the maildun client
 const mg = mailgun.client({
   username: 'api',
   key: process.env.MAILGUN_API_KEY || 'apiKey',
-  domain: process.env.MAILGUN_DOMAIN || 'sandbox-123.mailgun.org'
+  domain: process.env.MAILGUN_DOMAIN || 'sandbox-123.mailgun.org',
 });
 
 // Register controller
@@ -37,6 +41,7 @@ const register = async (req, res, next) => {
     // Respond with user data and token
     res.status(StatusCodes.CREATED).json({
       user: {
+        _id: user._id,
         parentName: user.parentName,
         email: user.email,
       },
@@ -63,25 +68,26 @@ const login = async (req, res, next) => {
 
     if (!user) {
       throw new UnauthenticatedError('Invalid Credentials');
-    };
+    }
 
     const isPasswordCorrect = await user.comparePassword(password);
 
     if (!isPasswordCorrect) {
       throw new UnauthenticatedError('Invalid Credentials');
-    };
+    }
 
     const token = await user.generateAuthToken();
 
-    await user.save()
+    await user.save();
 
-    res.status(StatusCodes.OK).json({ user: { name: user.parentName }, token });
+    res
+      .status(StatusCodes.OK)
+      .json({ user: { name: user.parentName }, token });
   } catch (error) {
     console.error('Login Error;', error);
     next(error);
-  };
+  }
 };
-
 
 // Forgot Password Controller
 const forgotPassword = async (req, res) => {
@@ -107,19 +113,23 @@ const forgotPassword = async (req, res) => {
     from: process.env.EMAIL_USER,
     to: user.email,
     subject: 'Password reset',
-    text: `You requested a password reset. Please click on the following link to reset your password: ${resetUrl}`
+    text: `You requested a password reset. Please click on the following link to reset your password: ${resetUrl}`,
   };
 
-  mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+  mg.messages
+    .create(process.env.MAILGUN_DOMAIN, data)
     .then(() => {
-      res.status(StatusCodes.OK).json({ message: 'Password reset link sent to your email' });
+      res
+        .status(StatusCodes.OK)
+        .json({ message: 'Password reset link sent to your email' });
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Error sending email:', error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Failed to send email' });
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: 'Failed to send email' });
     });
 };
-
 
 const resetPassword = async (req, res) => {
   const { token } = req.params;
@@ -130,7 +140,7 @@ const resetPassword = async (req, res) => {
   try {
     decoded = jwt.verify(token, process.env.JWT_SECRET);
   } catch (err) {
-    throw new BadRequestError("Token is invalid or has expired");
+    throw new BadRequestError('Token is invalid or has expired');
   }
 
   // Find the user by ID
@@ -145,31 +155,36 @@ const resetPassword = async (req, res) => {
 
   await user.save();
 
-  res.status(StatusCodes.OK).json({ message: "Password has been reset successfully" });
+  res
+    .status(StatusCodes.OK)
+    .json({ message: 'Password has been reset successfully' });
 };
 
 // Logout API
 const logout = async (req, res) => {
-  const { token } = req.user
+  const { token } = req.user;
 
-  const user = await User.findOne({ 'tokens.token' : token})
+  const user = await User.findOne({ 'tokens.token': token });
 
   if (!user) {
-    throw new UnauthenticatedError('Invalid Token')
+    throw new UnauthenticatedError('Invalid Token');
   }
 
-  user.tokens = user.tokens.filter((userToken) => userToken.token !== token)
+  user.tokens = user.tokens.filter(
+    (userToken) => userToken.token !== token
+  );
 
   await user.save();
 
-  res.status(StatusCodes.OK).json({ message: 'Logged out successfully'})
-}
-
+  res
+    .status(StatusCodes.OK)
+    .json({ message: 'Logged out successfully' });
+};
 
 module.exports = {
   register,
   login,
   forgotPassword,
   resetPassword,
-  logout
+  logout,
 };

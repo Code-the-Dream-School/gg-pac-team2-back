@@ -44,16 +44,21 @@ describe('Ride Request Controller', function () {
 
   describe('POST /api/v1/requests', function () {
     it('should create a new ride request', async function () {
-      const requester = await chai
+      const requesterRes = await chai
         .request(app)
         .post('/api/v1/auth/register')
         .send({
           parentName: 'Test Requester',
           email: 'test.requester@test.com',
           password: 'secret',
-        })
+        });
 
-      const token = requester.body.token;
+      console.log('Requester Response:', requesterRes.body);
+
+      const token = requesterRes.body.token;
+      const requesterId = requesterRes.body.user._id.toString();
+
+      requesterId.should.not.be.undefined;
 
       const profile = await User.create({
         parentName: 'Test Profile',
@@ -66,13 +71,29 @@ describe('Ride Request Controller', function () {
         .post('/api/v1/requests')
         .set('Authorization', `Bearer ${token}`)
         .send({
-          requestedBy: requester._id,
+          requester: requesterId,
           profile: profile._id,
           requestedDropOffDays: ['Monday', 'Wednesday', 'Friday'],
-          requestedPickupDays: ['Tuesday', 'Thursday'],
+          requestedPickUpDays: ['Tuesday', 'Thursday'],
         });
 
+      console.log('Ride request response body:', res.body);
+
       res.should.have.status(201);
+      res.body.should.be.an('object');
+      res.body.should.have.property('rideRequest');
+      res.body.rideRequest.should.have
+        .property('requester')
+        .eql(requesterId);
+      res.body.rideRequest.should.have
+        .property('profile')
+        .eql(profile._id.toString());
+      res.body.rideRequest.should.have
+        .property('requestedDropOffDays')
+        .eql(['Monday', 'Wednesday', 'Friday']);
+      res.body.rideRequest.should.have
+        .property('requestedPickUpDays')
+        .eql(['Tuesday', 'Thursday']);
     });
   });
 });
