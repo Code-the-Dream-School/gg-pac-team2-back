@@ -82,8 +82,7 @@ Content-Type: application/json
 
 ##### Body:
 {
-   "email": "johndoe@example.com",
-   "password": "yourpassword"
+   updatedData
 }
 
 #### Endpoint: GET '/:id'
@@ -94,6 +93,103 @@ Authorization: Bearer <token>
 
 #### Endpoint: DELETE '/:id'
 Deletes the profile of a user by their ID. Only the profile owner can delete their own profile.
+
+##### Headers:
+Authorization: Bearer <token>
+
+#### Endpoint: PATCH /api/v1/profile/:id/change-password
+Allows authenticated users to change their password. Verifies the current password and updates it if valid. All active tokens are revoked upon a successful password change
+
+##### Headers:
+Authorization: Bearer <token>
+
+##### Body:
+{
+   "currentPassword": "your current password",
+   "newPassword": "new password"
+}
+
+#### Endpoint: POST /api/v1/auth/forgot-password
+Handles password reset requests. Checks if the user exists by email, generates a password reset link with a token, and sends it to the user's email address. The token is valid for one hour.
+
+##### Body:
+{
+   "email": "your registered email"
+}
+
+#### Endpoint: POST /api/v1/auth/reset-password/:id/:token
+Allows users to reset their password using the reset token. The token is verified for validity and expiration before updating the password. All active tokens are revoked upon a successful password reset.
+
+##### Params:
+id (User ID) ,  token (Password reset token)
+
+##### Body:
+{
+   "password": "new password"
+}
+
+#### Endpoint: POST /api/v1/auth/logout
+Logs out the authenticated user by removing their token from the tokens array in the user's document.
+
+##### Headers:
+Authorization: Bearer <token>
+
+#### Endpoint: POST /api/v1/requests
+Allows authenticated users to create a new ride request specifying the profile, requested pickup days, and dropoff days.
+
+##### Headers:
+Authorization: Bearer <token>
+
+##### Body:
+{
+   "profile": "profileId",
+   "requestedDropOffDays": "Monday",
+   "requestedPickUpDays": "Friday" 
+}
+
+#### Endpoint: POST /api/v1/requests/:id
+Retrieves the details of a specific ride request. Accessible by both the requester and the profile owner.
+
+##### Headers:
+Authorization: Bearer <token>
+
+#### Endpoint: GET /api/v1/requests/sent
+Retrieves all ride requests that the authenticated user has sent.
+
+##### Headers:
+Authorization: Bearer <token>
+
+#### Endpoint: GET /api/v1/requests/received
+Retrieves all ride requests sent to the authenticated user.
+
+##### Headers:
+Authorization: Bearer <token>
+
+#### Endpoint: PATCH /api/v1/requests/:id
+Allows the requester to update the details of their ride request, such as pickup or dropoff days.
+
+##### Headers:
+Authorization: Bearer <token>
+
+##### Body:
+{
+   "requestedDropOffDays": "Monday",
+   "requestedPickUpDays": "Friday"
+}
+
+#### Endpoint: PATCH /api/v1/requests/:id/status
+Allows the profile owner to update the status of a ride request, setting it to either approved or declined.
+
+##### Headers:
+Authorization: Bearer <token>
+
+##### Body:
+{
+   "status": "approved"
+}
+
+#### Endpoint: DELETE /api/v1/requests/:id
+Allows the requester to delete their ride request.
 
 ##### Headers:
 Authorization: Bearer <token>
