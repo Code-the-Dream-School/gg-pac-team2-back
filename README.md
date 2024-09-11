@@ -112,7 +112,7 @@ The User model is designed to store user information securely, including hashed 
 6.  numberOfSeatsInCar (Number): Optional field indicating available seats in the car.
 7.  availableDropOffDays (Array): Enum field to store available drop-off days.
 8.  availablePickUpDays (Array): Enum field to store available pick-up days.
-9.  neighborhood (String): Optional field for the neighborhood.
+9.  address (String): Optional field for the address.
 10. phoneNumber (String): Optional field with validation for phone numbers.
 
 ### Middleware
