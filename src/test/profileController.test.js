@@ -92,7 +92,7 @@ describe('Profile Controller', function () {
           parentName: 'Updated User',
           email: 'updated.user@test.com',
           numberOfSeatsInCar: 3,
-          neighborhood: 'New Neighborhood',
+          address: 'New Address',
         });
 
       res.should.have.status(200);

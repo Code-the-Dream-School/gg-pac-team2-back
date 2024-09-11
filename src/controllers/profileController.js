@@ -8,7 +8,7 @@ const {
 
 // API to view All Profiles
 const readAllProfiles = async (req, res) => {
-  const { numberOfSeatsInCar, availableDropOffDays, availablePickUpDays, neighborhood, sort, fields, page, limit } = req.query;
+  const { numberOfSeatsInCar, availableDropOffDays, availablePickUpDays, address, sort, fields, page, limit } = req.query;
   const queryObject = {};
 
   if (numberOfSeatsInCar) {
@@ -23,8 +23,8 @@ const readAllProfiles = async (req, res) => {
     queryObject.availablePickUpDays = { $in: availablePickUpDays.split(',') };
   }
 
-  if (neighborhood) {
-    queryObject.neighborhood = neighborhood;
+  if (address) {
+    queryObject.address = address;
   }
 
   let result = User.find(queryObject).select('-password -tokens');

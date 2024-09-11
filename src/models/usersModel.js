@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema({
         enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
         default: [],
     },
-    neighborhood: {
+    address: {
         type: String,
         default: " "
     },
