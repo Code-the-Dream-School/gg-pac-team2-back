@@ -24,7 +24,10 @@ async function cleanupTestUsers() {
 }
 
 describe('Authentication Controller', function () {
+  this.timeout(15000);
+
   before(async () => {
+    this.timeout(15000);
     await connectDB();
     await cleanupTestUsers();
   });

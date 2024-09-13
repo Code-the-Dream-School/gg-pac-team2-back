@@ -1,0 +1,410 @@
+[
+  {
+    "parentName": "Olaf",
+    "email": "count.olaf@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "availablePickUpDays": ["Monday", "Wednesday"],
+    "neighborhood": "French Quarter",
+    "childrenNames": ["Sunny Baudelaire", "Violet Baudelaire", "Klaus Baudelaire"]
+  },
+  {
+    "parentName": "Drew Pickles",
+    "email": "drew.pickles@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": ["Monday", "Tuesday", "Wednesday", "Thursday" ],
+    "availablePickUpDays": [],
+    "neighborhood": "Toluca Lake",
+    "childrenNames": ["Angelica Pickles"]
+  },
+  {
+    "parentName": "Hal Wilkerson",
+    "email": "hal.wilkerson@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": [],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "neighborhood": "Northridge",
+    "childrenNames": ["Malcolm", "Reese", "Dewey"]
+  },
+  {
+    "parentName": "David Read",
+    "email": "david.read@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Monday", "Tuesday", "Wednesday"],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday"],
+    "neighborhood": "Elwood City",
+    "childrenNames": ["Arthur Read", "D.W. Read"]
+  },
+  {
+    "parentName": "Delia Ketchum",
+    "email": "delia.ketchum@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": [],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday"],
+    "neighborhood": "Pallet Town",
+    "childrenNames": ["Ash Ketchum"]
+  },
+  {
+    "parentName": "Phil Funnie",
+    "email": "phil.funnie@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 2,
+    "availableDropOffDays": [],
+    "availablePickUpDays": ["Thursday", "Friday"],
+    "neighborhood": "Bluffington",
+    "childrenNames": ["Doug Funnie", "Judy Funnie"]
+  },
+  {
+    "parentName": "Judy Neutron",
+    "email": "judy.neutron@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Wednesday"],
+    "availablePickUpDays": ["Monday", "Tuesday", "Friday"],
+    "neighborhood": "Retroville",
+    "childrenNames": ["Jimmy Neutron"]
+  },
+  {
+    "parentName": "Wilma Flintstone",
+    "email": "wilma.flintstone@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 5,
+    "availableDropOffDays": ["Thursday", "Friday"],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "neighborhood": "Bedrock",
+    "childrenNames": ["Pebbles Flintstone"]
+  },
+  {
+    "parentName": "George Jetson",
+    "email": "george.jetson@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "availablePickUpDays": [],
+    "neighborhood": "Orbit City",
+    "childrenNames": ["Elroy Jetson", "Judy Jetson"]
+  },
+  {
+    "parentName": "Ellen Talbot",
+    "email": "ellen.talbot@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 6,
+    "availableDropOffDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "availablePickUpDays": [],
+    "neighborhood": "Oakdale"
+  },
+  {
+    "parentName": "Caroline Ingalls",
+    "email": "caroline.ingalls@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 4,
+    "availableDropOffDays": [],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "neighborhood": "Walnut Grove",
+    "childrenNames": ["Laura Ingalls", "Mary Ingalls"]
+  },
+  {
+    "parentName": "Nani Pelekai",
+    "email": "nani.pelekai@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": [],
+    "availablePickUpDays": [],
+    "neighborhood": "Kokaua",
+    "childrenNames": ["Lilo Pelekai"]
+  },
+  {
+    "parentName": "Arthur Weasley",
+    "email": "arthur.weasley@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 12,
+    "availableDropOffDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "availablePickUpDays": [],
+    "neighborhood": "Ottery St. Catchpole",
+    "childrenNames": ["Percy Weasley", "Fred Weasley", "George Weasley", "Ron Weasley"]
+  },
+  {
+    "parentName": "Mary Poppins",
+    "email": "mary.poppins@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": [],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "neighborhood": "Kensington",
+    "childrenNames": ["Jane Banks", "Michael Banks"]
+  },
+  {
+    "parentName": "Charlie Jones",
+    "email": "charlie.jones@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+    "availablePickUpDays": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+    "neighborhood": "Sellwood-Moreland",
+    "childrenNames": "Caroline Jones"
+  },
+  {
+    "parentName": "Betty Rubble",
+    "email": "betty.rubble@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": ["Tuesday", "Thursday"],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "neighborhood": "Bedrock",
+    "childrenNames": ["Bamm-Bamm Rubble"]
+  },
+  {
+    "parentName": "Elizabeth Brewer",
+    "email": "elizabeth.brewer@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": [],
+    "availablePickUpDays": [],
+    "neighborhood": "Stoneybrook",
+    "childrenNames": ["Kristy Thomas", "David Michael Thomas"]
+  },
+  {
+    "parentName": "Richard Spier",
+    "email": "richard.spier@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 2,
+    "availableDropOffDays": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+    "neighborhood": "Stoneybrook",
+    "childrenNames": ["Mary Anne Spier"]
+  },
+  {
+    "parentName": "Narcissa Malfoy",
+    "email": "narcissa.malfoy@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 2,
+    "availableDropOffDays": ["Wednesday"],
+    "availablePickUpDays": ["Friday"],
+    "neighborhood": "Wiltshire",
+    "childrenNames": ["Draco Malfoy"]
+  },
+  {
+    "parentName": "June Cleaver",
+    "email": "june.cleaver@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "neighborhood": "Mayfield",
+    "childrenNames": ["Wally Cleaver", "Theodore 'Beaver' Cleaver"]
+  },
+  {
+    "parentName": "Bitzi Baxter",
+    "email": "bitzi.baxter@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 2,
+    "availableDropOffDays": ["Monday", "Tuesday"],
+    "availablePickUpDays": [],
+    "neighborhood": "Elwood City",
+    "childrenNames": ["Buster Baxter"]
+  },
+  {
+    "parentName": "Hilda/Zelda Spellman",
+    "email": "hilda.spellman@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 13,
+    "availableDropOffDays": ["Monday", "Wednesday", "Friday"],
+    "availablePickUpDays": ["Monday", "Thursday"],
+    "neighborhood": "Westbridge",
+    "childrenNames": ["Sabrina Spellman"]
+  },
+  {
+    "parentName": "Josephine Rabbit",
+    "email": "josephine.rabbit@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 4,
+    "availableDropOffDays": ["Monday", "Friday"],
+    "availablePickUpDays": ["Wednesday", "Thursday"],
+    "neighborhood": "Lake District",
+    "childrenNames": ["Peter Rabbit", "Flopsy Rabbit", "Mopsy Rabbit", "Cotton-Tail Rabbit"]
+  },
+  {
+    "parentName": "Chas Finster",
+    "email": "chas.finster@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 2,
+    "availableDropOffDays": ["Tuesday"],
+    "availablePickUpDays": ["Friday"],
+    "neighborhood": "Toluca Lake",
+    "childrenNames": ["Chuckie Finster"]
+  },
+  {
+    "parentName": "Opal Otter",
+    "email": "opal.otter@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Wednesday"],
+    "availablePickUpDays": ["Wednesday"],
+    "neighborhood": "Lake Hoohaw"
+  },
+  {
+    "parentName": "Oliver Frensky",
+    "email": "oliver.frensky@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Monday", "Thursday"],
+    "availablePickUpDays": ["Tuesday", "Thursday"],
+    "neighborhood": "Elwood City",
+    "childrenNames": ["Francine Frensky", "Catherine Frensky"]
+  },
+  {
+    "parentName": "Morticia Addams",
+    "email": "morticia.addams@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Friday"],
+    "availablePickUpDays": ["Friday"],
+    "neighborhood": "Sleepy Hallow",
+    "childrenNames": ["Wednesday Addams", "Pugsley Addams"]
+  },
+  {
+    "parentName": "Petunia Dursley",
+    "email": "petunia.dursley@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": ["Monday", "Wednesday"],
+    "availablePickUpDays": ["Tuesday", "Thursday"],
+    "neighborhood": "Little Whinging",
+    "childrenNames": ["Dudley Dursley"]
+  },
+  {
+    "parentName": "Danny Tanner",
+    "email": "danny.tanner@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Thursday"],
+    "availablePickUpDays": ["Thursday"],
+    "neighborhood": "Alamo Square",
+    "childrenNames": ["D.J. Tanner", "Stephanie Tanner", "Michelle Tanner"]
+  },
+  {
+    "parentName": "Bob Belcher",
+    "email": "bob.belcher@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Wednesday", "Friday"],
+    "availablePickUpDays": ["Monday"],
+    "neighborhood": "Asbury Park",
+    "childrenNames": ["Tina Belcher", "Gene Belcher", "Louise Belcher"]
+  },
+  {
+    "parentName": "Miriam Pataki",
+    "email": "miriam.pataki@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 4,
+    "availableDropOffDays": ["Tuesday", "Friday"],
+    "availablePickUpDays": ["Monday", "Thursday"],
+    "neighborhood": "Corktown",
+    "childrenNames": ["Helga Pataki"]
+  },
+  {
+    "parentName": "Chilli(Bandit) Heeler",
+    "email": "chilli.heeler@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Wednesday"],
+    "availablePickUpDays": ["Tuesday", "Thursday"],
+    "neighborhood": "Paddington",
+    "childrenNames": ["Bluey Heeler", "Bingo Heeler"]
+  },
+  {
+    "parentName": "Cpt. Ralph Crewe",
+    "email": "ralph.crewe@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Thursday"],
+    "availablePickUpDays": ["Wednesday"],
+    "neighborhood": "Kensington",
+    "childrenNames": ["Sara Crewe"]
+  },
+  {
+    "parentName": "Martha Merriman",
+    "email": "martha.merriman@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": ["Monday", "Wednesday"],
+    "availablePickUpDays": ["Thursday"],
+    "neighborhood": "Williamsburg",
+    "childrenNames": ["Felicity Merriman"]
+  },
+  {
+    "parentName": "Tatsuo Kusakabe",
+    "email": "tatsuo.kusakabe@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 2,
+    "availableDropOffDays": ["Monday", "Wednesday"],
+    "availablePickUpDays": ["Thursday"],
+    "neighborhood": "Tokigawa",
+    "childrenNames": ["Satsuki Kusakabe", "Mei Kusakabe"]
+  },
+  {
+    "parentName": "Marilla & Matthew Cuthbert",
+    "email": "matthew.cuthbert@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 4,
+    "availableDropOffDays": ["Tuesday", "Friday"],
+    "availablePickUpDays": ["Wednesday"],
+    "neighborhood": "Avonlea",
+    "childrenNames": ["Anne Shirley"]
+  },
+  {
+    "parentName": "Eleanor Little",
+    "email": "eleanor.little@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 2,
+    "availableDropOffDays": ["Monday", "Thursday"],
+    "availablePickUpDays": ["Wednesday"],
+    "neighborhood": "Upper West Side",
+    "childrenNames": ["Stuart Little", "George Little"]
+  },
+  {
+    "parentName": "Ray Rocket",
+    "email": "ray.rocket@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Wednesday", "Friday"],
+    "availablePickUpDays": ["Thursday"],
+    "neighborhood": "Ocean Shores",
+    "childrenNames": ["Reggie Rocket", "Otto Rocket"]
+  },
+  {
+    "parentName": "Lois Foutley",
+    "email": "lois.foutley@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 1,
+    "availableDropOffDays": ["Thursday"],
+    "availablePickUpDays": ["Friday"],
+    "neighborhood": "Shelterville",
+    "childrenNames": ["Ginger Foutley", "Carl Foutley"]
+  },
+  {
+    "parentName": "Oliver Warbucks",
+    "email": "oliver.warbucks@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 4,
+    "availableDropOffDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "availablePickUpDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "neighborhood": "Upper East Side",
+    "childrenNames": ["Annie"]
+  },
+  {
+    "parentName": "Jill Taylor",
+    "email": "jill.taylor@testmail.com",
+    "password": "secret",
+    "numberOfSeatsInCar": 3,
+    "availableDropOffDays": [],
+    "availablePickUpDays": ["Tuesday", "Wednesday", "Thursday"],
+    "neighborhood": "Grosse Pointe",
+    "childrenNames": ["Brad Taylor", "Randy Taylor", "Mark Taylor"]
+  }
+]
