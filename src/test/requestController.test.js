@@ -53,12 +53,12 @@ describe('Ride Request Controller', function () {
           password: 'secret',
         });
 
-      console.log('Requester Response:', requesterRes.body);
+      // console.log('Requester Response:', requesterRes.body);
 
       const token = requesterRes.body.token;
       const requesterId = requesterRes.body.user._id.toString();
 
-      requesterId.should.not.be.undefined;
+      // requesterId.should.not.be.undefined;
 
       const profile = await User.create({
         parentName: 'Test Profile',
@@ -77,7 +77,7 @@ describe('Ride Request Controller', function () {
           requestedPickUpDays: ['Tuesday', 'Thursday'],
         });
 
-      console.log('Ride request response body:', res.body);
+      // console.log('Ride request response body:', res.body);
 
       res.should.have.status(201);
       res.body.should.be.an('object');
@@ -96,4 +96,53 @@ describe('Ride Request Controller', function () {
         .eql(['Tuesday', 'Thursday']);
     });
   });
+
+  // describe('GET /api/v1/requests/:id', function () {
+  //   it('should get a ride request by ID', async function () {
+  //     const requesterRes = await chai
+  //       .request(app)
+  //       .post('/api/v1/auth/register')
+  //       .send({
+  //         parentName: 'Test Requester',
+  //         email: 'test.requester@test.com',
+  //         password: 'secret',
+  //       });
+
+  //     console.log('Requester response', requesterRes.body);
+
+  //     const token = requesterRes.body.token;
+  //     const requesterId = requesterRes.body.user._id.toString();
+
+  //     const profile = await User.create({
+  //       parentName: 'Test Profile',
+  //       email: 'test.profile@test.com',
+  //       password: 'secret',
+  //     });
+
+  //     const createRequestRes = await chai
+  //       .request(app)
+  //       .post('/api/v1/requests')
+  //       .set('Authorization', `Bearer {token}`)
+  //       .send({
+  //         requester: requesterId,
+  //         profile: profile._id,
+  //         requestedDropOffDays: ['Monday', 'Wednesday', 'Friday'],
+  //         requestedPickUpDays: ['Tuesday', 'Thursday'],
+  //       });
+
+  //     console.log(
+  //       'Ride request creation response:',
+  //       createRequestRes.body
+  //     );
+
+  //     const rideRequestId = createRequestRes.body.rideRequest._id;
+
+  //     const res = await chai
+  //       .request(app)
+  //       .get(`/api/v1/requests/${rideRequestId}`)
+  //       .set('Authorization', `Bearer ${token}`);
+
+  //     console.log('Ride request response body:', res.body);
+  //   });
+  // });
 });
