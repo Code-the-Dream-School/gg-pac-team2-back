@@ -56,7 +56,9 @@ const readRequest = async (req, res) => {
 const readSentRequests = async (req, res) => {
   const userId = req.user.userId;
 
-  const requests = await RideRequest.find({ requester: userId });
+  const requests = await RideRequest.find({
+    requester: userId,
+  }).populate('profile');
 
   res.status(StatusCodes.OK).json({ requests });
 };
@@ -65,7 +67,9 @@ const readSentRequests = async (req, res) => {
 const readReceivedRequests = async (req, res) => {
   const userId = req.user.userId;
 
-  const requests = await RideRequest.find({ profile: userId });
+  const requests = await RideRequest.find({
+    profile: userId,
+  }).populate('requester');
 
   res.status(StatusCodes.OK).json({ requests });
 };
